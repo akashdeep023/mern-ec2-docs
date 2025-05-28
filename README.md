@@ -24,6 +24,8 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
 6. Complete identity verification (email/phone)
 7. Log into the console once your account is active
 
+---
+
 ## 🖥️ **Launch EC2 Instance**
 
 1. In the AWS Console, search for and open the **EC2** service
@@ -84,3 +86,40 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
     > ✅ Use `ubuntu@` for Ubuntu instances, or `ec2-user@` for Amazon Linux
 
     > ✅ If successful, you'll be logged into your EC2 instance via the terminal.
+
+---
+
+## ⚙️ Install Node.js and NVM
+
+1. Go to [Node.js Downloads](https://nodejs.org/en/download)
+2. Select the exact Node.js version your project uses
+3. Since we're using **Ubuntu**, choose the **macOS/Linux** tab
+4. Choose the **nvm** installation option
+5. This will also install **npm** (Node Package Manager)
+6. Install NVM and Node.js Command
+
+    ```bash
+    # Download and install NVM:
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+
+    # Load NVM into current shell (without restarting terminal):
+    \. "$HOME/.nvm/nvm.sh"
+
+    # Install Node.js (version 23 in this case):
+    nvm install 23
+    ```
+
+7. Verify Installations Command
+
+    ```bash
+    # Check npm version:
+    npm -v   # Should print "10.9.2"
+
+    # Check Node.js version:
+    node -v  # Should print "v23.11.1"
+    nvm current  # Should print "v23.11.1"
+    ```
+
+    > 📌 Make sure you're connected to the internet when running these commands.
+
+    > 📌 You can change the Node.js version later using `nvm install <version>` or `nvm use <version>`
