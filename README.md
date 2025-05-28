@@ -65,6 +65,7 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
 3. **Set the correct permission** for your `.pem` file:
 
     ```bash
+    # Run this command once to set the correct permission for your PEM file
     chmod 400 "aws-instance-login.pem"
     ```
 
@@ -76,6 +77,7 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
    To connect to your EC2 instance, you must use it like this:
 
     ```bash
+    # Connect to your EC2 instance using this command:
     ssh -i "aws-instance-login.pem" ubuntu@ec2-00-0-000-000.ap-south-1.compute.amazonaws.com
     ```
 
@@ -123,6 +125,18 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
     > 📌 Make sure you're connected to the internet when running these commands.
 
     > 📌 You can change the Node.js version later using `nvm install <version>` or `nvm use <version>`
+
+8. Exit from your EC2 Instance (Virtual Machine)
+
+    ```bash
+    exit
+    ```
+
+9. Reconnect to your EC2 Instance using Terminal
+
+    ```bash
+    ssh -i "aws-instance-login.pem" ubuntu@ec2-00-0-000-000.ap-south-1.compute.amazonaws.com
+    ```
 
 ---
 
