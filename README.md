@@ -51,3 +51,36 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
 2. Find your running instance and click on the **Instance ID**
 3. On the top-right, click the **Connect** button
 4. Choose the **SSH Client** tab (used for terminal access)
+
+---
+
+## 🧭 Steps to Connect Using Terminal
+
+1. **Open an SSH client** (Terminal on macOS/Linux, or PowerShell on Windows)
+2. **Locate your private key file**  
+   The key used to launch this instance is:  
+   `aws-instance-login.pem`
+3. **Set the correct permission** for your `.pem` file:
+
+    ```bash
+    chmod 400 "aws-instance-login.pem"
+    ```
+
+4. **Connect to your instance using its Public DNS**  
+   Example Public DNS:  
+   `ec2-00-0-000-000.ap-south-1.compute.amazonaws.com`
+
+5. 🖥️ **Example SSH Command**  
+   To connect to your EC2 instance, you must use it like this:
+
+    ```bash
+    ssh -i "aws-instance-login.pem" ubuntu@ec2-00-0-000-000.ap-south-1.compute.amazonaws.com
+    ```
+
+    > ✅ Make sure you’re in the directory where your `.pem` file is saved
+
+    > ✅ Replace the DNS with your actual `EC2 Public DNS`
+
+    > ✅ Use `ubuntu@` for Ubuntu instances, or `ec2-user@` for Amazon Linux
+
+    > ✅ If successful, you'll be logged into your EC2 instance via the terminal.
