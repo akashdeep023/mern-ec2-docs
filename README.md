@@ -123,3 +123,19 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
     > 📌 Make sure you're connected to the internet when running these commands.
 
     > 📌 You can change the Node.js version later using `nvm install <version>` or `nvm use <version>`
+
+---
+
+## 🗃️ **Clone Your MERN Project**
+
+1. Frontend server
+
+    ```bash
+    git clone https://github.com/your-username/frontend-repo.git
+    ```
+
+2. Backend server
+
+    ```bash
+    git clone https://github.com/your-username/backend-repo.git
+    ```
