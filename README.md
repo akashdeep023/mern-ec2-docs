@@ -160,13 +160,13 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
 
 **Update Ubuntu package list**
 
-    ```bash
-    sudo apt update
-    ```
+```bash
+sudo apt update
+```
 
-    > This command refreshes the list of available packages and their versions.
+> This command refreshes the list of available packages and their versions.
 
-    > It's recommended to run before installing any new software.
+> It's recommended to run before installing any new software.
 
 ### Nginx Commands
 
@@ -244,3 +244,58 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
     ```bash
     pm2 start npm --name "backend" -- start
     ```
+
+---
+
+## 🌐 **Setup Frontend (React) with Nginx on AWS EC2**
+
+1. Navigate to the Frontend Project
+
+    ```bash
+    cd frontend-repo
+    ```
+
+2. Install Dependencies & Build the Project
+
+    ```bash
+    npm install
+    npm run build
+    ```
+
+3. Deploy Build Files to Nginx Directory
+
+    ```bash
+    # Start & Enable Nginx
+    # copy code from build to Nginx web root
+    sudo scp -r build/* /var/www/html/ # dist
+    ```
+
+    > **Note**: Make sure `/var/www/html/` is empty or only contains files from your intended deployment.
+
+4. Enable HTTP Access on Port 80 (in AWS EC2)
+
+    - Before accessing your frontend in the browser, make sure port 80 is open on your instance:
+
+    1. Go to the **EC2 > Instances** page
+    2. Find your running instance and click on the **Instance ID**
+    3. GO the **Security** tab
+    4. Click on the linked **Security groups**
+    5. Under **Inbound rules**, click **Edit Inbound Rules**
+    6. Add a rule:
+        - Type `HTTP`
+        - Port `80`
+        - Source `0.0.0.0/0` (for public access)
+    7. Click **Save rules**
+
+### **Your Frontend is Now Live!**
+
+-   Open your browser and go to:
+
+    ```bash
+    http://<your-ec2-public-ip>
+    ```
+
+-   If it doesn't load, make sure:
+    -   Nginx is running: `sudo systemctl status nginx`
+    -   Your build files are correctly copied
+    -   Port `80` is open in your firewall and AWS security group
