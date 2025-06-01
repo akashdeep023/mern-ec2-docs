@@ -153,3 +153,94 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
     ```bash
     git clone https://github.com/your-username/backend-repo.git
     ```
+
+---
+
+## ⚙️ Install Nginx and PM2
+
+**Update Ubuntu package list**
+
+    ```bash
+    sudo apt update
+    ```
+
+    > This command refreshes the list of available packages and their versions.
+
+    > It's recommended to run before installing any new software.
+
+### Nginx Commands
+
+1.  Install Nginx to deploy our project
+
+    ```bash
+    sudo apt install nginx
+    ```
+
+2.  Start Nginx
+
+    ```bash
+    sudo systemctl start nginx
+    ```
+
+3.  Enable Nginx on boot
+
+    ```bash
+    sudo systemctl enable nginx
+    ```
+
+### PM2 Commands
+
+1.  Install PM2 to run our server 24X7
+
+    ```bash
+    npm install pm2 -g
+    ```
+
+2.  Start the server with PM2
+
+    ```bash
+    pm2 start npm -- start # pm2 start (run pm2 server), npm start (project start command)
+    pm2 start npm --name "backend" -- start # or with a custom name
+    ```
+
+3.  Check server logs
+
+    ```bash
+    pm2 logs
+    ```
+
+4.  Remove (flush) PM2 server logs
+
+    ```bash
+    pm2 flush <pm2-server-name> # by name
+    # or
+    pm2 flush <pm2-server-id> # by id
+    ```
+
+5.  View all list of PM2 server
+
+    ```bash
+    pm2 list # show all start server
+    ```
+
+6.  Stop pm2 server
+
+    ```bash
+    pm2 stop <pm2-server-name> # by name
+    # or
+    pm2 stop <pm2-server-id> # by id
+    ```
+
+7.  Delete pm2 server
+
+    ```bash
+    pm2 delete <pm2-server-name> # by name
+    # or
+    pm2 delete <pm2-server-id> # by id
+    ```
+
+8.  Custom name of pm2 server
+
+    ```bash
+    pm2 start npm --name "backend" -- start
+    ```
