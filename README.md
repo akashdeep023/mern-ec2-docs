@@ -270,6 +270,14 @@ sudo apt update
 
 3. Setup `.env` File
 
+-   Create `.env` file:
+
+    ```bash
+    sudo nano .env
+    ```
+
+-   Paste it all your frontend environment variables
+
     ```bash
     # Example environment variables
     BACKEND_URL=/api
@@ -335,6 +343,14 @@ sudo apt update
     - Add your EC2 public IP address or use `0.0.0.0/0` (for open access)
 
 4. Setup `.env` File
+
+-   Create `.env` file:
+
+    ```bash
+    sudo nano .env
+    ```
+
+-   Paste it all your backend environment variables
 
     ```bash
     # Example environment variables
