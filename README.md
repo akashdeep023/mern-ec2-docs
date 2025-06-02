@@ -188,6 +188,12 @@ sudo apt update
     sudo systemctl enable nginx
     ```
 
+4.  Restart Nginx
+
+    ```bash
+    sudo systemctl restart nginx
+    ```
+
 ### PM2 Commands
 
 1.  Install PM2 to run our server 24X7
@@ -262,7 +268,16 @@ sudo apt update
     npm run build
     ```
 
-3. Deploy Build Files to Nginx Directory
+3. Setup `.env` File
+
+    ```bash
+    # Example environment variables
+    BACKEND_URL=/api
+    ```
+
+    > Save and Exit
+
+4. Deploy Build Files to Nginx Directory
 
     ```bash
     # Start & Enable Nginx
@@ -272,7 +287,7 @@ sudo apt update
 
     > **Note**: Make sure `/var/www/html/` is empty or only contains files from your intended deployment.
 
-4. Enable HTTP Access on Port 80 (in AWS EC2)
+5. Enable HTTP Access on Port 80 (in AWS EC2)
 
     - Before accessing your frontend in the browser, make sure port 80 is open on your instance:
 
@@ -287,15 +302,120 @@ sudo apt update
         - Source `0.0.0.0/0` (for public access)
     7. Click **Save rules**
 
-### **Your Frontend is Now Live!**
+6. Your Frontend is Now Live!
 
--   Open your browser and go to:
+    - Open your browser and go to:
+
+        ```bash
+        http://<your-ec2-ip>/
+        # or
+        http://domain.com/
+        ```
+
+---
+
+## 🌍 **Setup Backend (Node + Express) on AWS EC2**
+
+1. Navigate to the Backend Project
 
     ```bash
-    http://<your-ec2-public-ip>
+    cd backend-repo
     ```
 
--   If it doesn't load, make sure:
-    -   Nginx is running: `sudo systemctl status nginx`
-    -   Your build files are correctly copied
-    -   Port `80` is open in your firewall and AWS security group
+2. Install Dependencies
+
+    ```bash
+    npm install
+    ```
+
+3. Whitelist EC2 IP in MongoDB Atlas
+
+    - Go to [MongoDB Atlas](https://www.mongodb.com/)
+    - Navigate to **Network Access** -> Add IP Address
+    - Add your EC2 public IP address or use `0.0.0.0/0` (for open access)
+
+4. Setup `.env` File
+
+    ```bash
+    # Example environment variables
+    PORT=7777
+    MONGO_DB=mongodb+srv://username:password@cluster.mongodb.net/dbname
+    ```
+
+    > Save and Exit
+
+5. Start the backend server with PM2
+
+    ```bash
+    pm2 start npm --name "backend" -- start
+    ```
+
+    > This keeps your server running in the background, even after SSH disconnects.
+
+6. Configure Nginx to Reverse Proxy to Node.js
+
+    - Open the Nginx default config:
+
+        ```bash
+        sudo nano /etc/nginx/sites-available/default
+        ```
+
+    - Replace or update the contents with:
+
+        ```bash
+        # ...
+        # Add searver name and location
+        server_name 00.0.000.000; # Domain Name or Instance IP Address
+        location /api/ {
+                proxy_pass http://localhost:7777/;  # (PORT - 7777) Pass the request to the Node.js app
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection 'upgrade';
+                proxy_set_header Host $host;
+                proxy_cache_bypass $http_upgrade;
+        }
+        # Correctly redirects all unknown (404) routes to index.html
+        location / {
+                # First attempt to serve request as file, then
+                # as directory, then fall back to displaying a 404.
+                # try_files $uri $uri/ =404;
+                try_files $uri /index.html;
+        }
+        # ...
+        ```
+
+7. Save and Exit
+
+    - Press `CTRL + O`, Enter to save
+    - Press `CTRL + X` to exit
+
+8. Restart Nginx
+
+    ```bash
+     sudo systemctl restart nginx
+    ```
+
+9. Enable HTTP Access on Port `7777` (in AWS EC2)
+
+    - Before accessing your backend in the browser, make sure port `7777` is open on your instance:
+
+    1. Go to the **EC2 > Instances** page
+    2. Find your running instance and click on the **Instance ID**
+    3. GO the **Security** tab
+    4. Click on the linked **Security groups**
+    5. Under **Inbound rules**, click **Edit Inbound Rules**
+    6. Add a rule:
+        - Type `HTTP`
+        - Port `7777`
+        - Source `0.0.0.0/0` (for public access)
+    7. Click **Save rules**
+
+10. Your Backend is Now Live!
+
+    - You can now access your backend API via:
+
+        ```bash
+        http://<your-ec2-ip>/api/
+        # or
+        http://domain.com/api/
+        ```
