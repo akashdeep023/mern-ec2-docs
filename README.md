@@ -419,3 +419,36 @@ sudo apt update
         # or
         http://domain.com/api/
         ```
+
+---
+
+## 🧯 **Troubleshooting**
+
+-   If it doesn't load, make sure:
+
+    -   **Nginx is running** `sudo systemctl status nginx`
+    -   **Your build files** correctly copied to `/var/www/html`
+    -   **Port not open?** Check AWS Security Groups
+    -   **App crashing?** Run `pm2 logs`
+    -   **Server can't connect to MongoDB Atlas?** Check IP whitelisting
+
+---
+
+## ✅ **Done!**
+
+Your MERN stack is now live on AWS EC2. 🎉
+
+```bash
+http://<your-ec2-ip>
+#or
+http://domain.com
+```
+
+---
+
+## 📎 **Resources**
+
+-   [MongoDB Atlas](https://www.mongodb.com/)
+-   [Node.js Docs](https://nodejs.org/en)
+-   [PM2 Docs](https://pm2.keymetrics.io/)
+-   [Nginx Config Reference](https://nginx.org/)
