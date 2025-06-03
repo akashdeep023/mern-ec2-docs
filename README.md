@@ -144,13 +144,13 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
 
 ### 📂 **Clone Public Repositories on EC2**
 
-1. Frontend Repositorie
+1. Frontend Repository
 
     ```bash
     git clone https://github.com/your-username/frontend-repo.git
     ```
 
-2. Backend Repositorie
+2. Backend Repository
 
     ```bash
     git clone https://github.com/your-username/backend-repo.git
@@ -191,13 +191,13 @@ git config --global credential.helper store
 
 #### 3. 📥 Clone the **Private Repository**
 
-1.  Frontend Repositorie
+1.  Frontend Repository
 
     ```bash
     git clone https://<username>:<your-token>@github.com/<username>/<frontend-repo>.git
     ```
 
-2.  Backend Repositorie
+2.  Backend Repository
 
     ```bash
     git clone https://github.com/your-username/backend-repo.git
@@ -299,7 +299,15 @@ sudo apt update
     pm2 stop <pm2-server-id> # by id
     ```
 
-7.  Delete pm2 server
+7.  Restart pm2 server
+
+    ```bash
+    pm2 restart <pm2-server-name> # by name
+    # or
+    pm2 restart <pm2-server-id> # by id
+    ```
+
+8.  Delete pm2 server
 
     ```bash
     pm2 delete <pm2-server-name> # by name
@@ -307,7 +315,7 @@ sudo apt update
     pm2 delete <pm2-server-id> # by id
     ```
 
-8.  Custom name of pm2 server
+9.  Custom name of pm2 server
 
     ```bash
     pm2 start npm --name "backend" -- start
@@ -559,6 +567,60 @@ http://domain.com
 ```
 
 ---
+
+## Redploy MERN Project
+
+### Backend & Frontend Repo Redeploy Guide
+
+#### Frontend Repository
+
+1. Navigate to the Frontend Project
+
+    ```bash
+    cd frontend-repo
+    ```
+
+2. Pull latest code & Install dependencies
+    ```bash
+    git pull
+    npm install
+    ```
+3. Build the project (with extended memory if needed)
+
+    ```bash
+    npm run build
+    #or
+    NODE_OPTIONS="--max-old-space-size=4096" npm run build
+    ```
+
+4. Deploy Build Files to Nginx Directory
+
+    ```bash
+    sudo scp -r build/* /var/www/html/ # dist
+    ```
+
+#### Backend Repository
+
+1. Navigate to the Backend Project
+
+    ```bash
+    cd backend-repo
+    ```
+
+2. Pull latest code & Install dependencies
+
+    ```bash
+    git pull
+    npm install
+    ```
+
+3. Restart the PM2 server
+
+    ```bash
+    pm2 restart <pm2-server-name> # by name
+    # or
+    pm2 restart <pm2-server-id> # by id
+    ```
 
 ## 📎 **Resources**
 
