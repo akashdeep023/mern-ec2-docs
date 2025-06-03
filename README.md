@@ -142,17 +142,79 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
 
 ## 🗃️ **Clone Your MERN Project**
 
-1. Frontend server
+### 📂 **Clone Public Repositories on EC2**
+
+1. Frontend Repositorie
 
     ```bash
     git clone https://github.com/your-username/frontend-repo.git
     ```
 
-2. Backend server
+2. Backend Repositorie
 
     ```bash
     git clone https://github.com/your-username/backend-repo.git
     ```
+
+#### 4. 📂 Verify Cloned Repo
+
+```bash
+ls
+```
+
+---
+
+### 🔐 **Clone Private Repositories on EC2**
+
+<details>
+  <summary>Click to view full instructions</summary>
+
+#### 1. ✅ Configure Git to Store Credentials
+
+```bash
+git config --global credential.helper store
+```
+
+> This stores your credentials locally so you don’t need to enter them every time (⚠️ not recommended for production environments).
+
+---
+
+#### 2. 🔑 Generate a GitHub Personal Access Token (PAT)
+
+1. Go to [**GitHub → Settings → Developer settings → Personal access tokens**](https://github.com/settings/tokens)
+2. Click **"Fine-grained tokens"** or **"Tokens (classic)"**
+3. Click **Generate new token**
+4. Set the **expiration date** and **name**
+5. Enable the required scopes (for private repo access, enable at least: `repo`)
+6. Click **Generate token**
+7. Copy the token **immediately** — you won’t see it again!
+
+#### 3. 📥 Clone the **Private Repository**
+
+1.  Frontend Repositorie
+
+    ```bash
+    git clone https://<username>:<your-token>@github.com/<username>/<frontend-repo>.git
+    ```
+
+2.  Backend Repositorie
+
+    ```bash
+    git clone https://github.com/your-username/backend-repo.git
+    ```
+
+#### 4. 📂 Verify Cloned Repo
+
+```bash
+ls
+```
+
+#### ⚠️ Security Warning
+
+-   **Do not share or commit your token in code**
+-   For production or shared servers, use **SSH keys** or **GitHub CLI**
+
+</details>
 
 ---
 
