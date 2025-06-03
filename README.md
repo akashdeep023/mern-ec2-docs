@@ -317,20 +317,56 @@ sudo apt update
 
 ## 🌐 **Setup Frontend (React) with Nginx on AWS EC2**
 
-1. Navigate to the Frontend Project
+1.  Navigate to the Frontend Project
 
     ```bash
     cd frontend-repo
     ```
 
-2. Install Dependencies & Build the Project
+2.  Install Dependencies & Build the Project
 
     ```bash
     npm install
     npm run build
     ```
 
-3. Setup `.env` File
+    <details>
+
+    <summary>⚠️ Build failed? Click to view memory fix instructions.
+
+    If the build fails due to memory limitations (common on small EC2 instances), follow these steps to add a swap file:</summary>
+
+    1.  Check Available Memory
+
+        ```bash
+        free -h
+        ```
+
+    2.  Create & Enable Swap File (2GB)
+
+        ```bash
+        sudo dd if=/dev/zero of=/swapfile bs=1M count=2048
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+        echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+        ```
+
+    3.  Confirm Swap is Active
+
+        ```bash
+        sudo swapon --show
+        free -h
+        ```
+
+    4.  Retry Build with Increased Memory Allocation
+
+        ```bash
+        NODE_OPTIONS="--max-old-space-size=4096" npm run build
+        ```
+
+       </details>
+
+3.  Setup `.env` File
 
 -   Create `.env` file:
 
