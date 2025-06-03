@@ -1,6 +1,6 @@
 # **MERN EC2 Docs**
 
-_A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) stack application on an AWS EC2 instance._
+_**A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) stack application on an AWS EC2 instance.**_
 
 ---
 
@@ -376,22 +376,22 @@ sudo apt update
 
 3.  Setup `.env` File
 
--   Create `.env` file:
+    -   Create `.env` file:
 
-    ```bash
-    sudo nano .env
-    ```
+        ```bash
+        sudo nano .env
+        ```
 
--   Paste it all your frontend environment variables
+    -   Paste it all your frontend environment variables
 
-    ```bash
-    # Example environment variables
-    BACKEND_URL=/api
-    ```
+        ```bash
+        # Example environment variables
+        BACKEND_URL=/api
+        ```
 
-    > Save and Exit
+        > Save and Exit
 
-4. Deploy Build Files to Nginx Directory
+4.  Deploy Build Files to Nginx Directory
 
     ```bash
     # Start & Enable Nginx
@@ -401,9 +401,9 @@ sudo apt update
 
     > **Note**: Make sure `/var/www/html/` is empty or only contains files from your intended deployment.
 
-5. Enable HTTP Access on Port 80 (in AWS EC2)
+5.  Enable HTTP Access on Port 80 (in AWS EC2)
 
-    - Before accessing your frontend in the browser, make sure port 80 is open on your instance:
+    -   Before accessing your frontend in the browser, make sure port 80 is open on your instance:
 
     1. Go to the **EC2 > Instances** page
     2. Find your running instance and click on the **Instance ID**
@@ -416,9 +416,9 @@ sudo apt update
         - Source `0.0.0.0/0` (for public access)
     7. Click **Save rules**
 
-6. Your Frontend is Now Live!
+6.  Your Frontend is Now Live!
 
-    - Open your browser and go to:
+    -   Open your browser and go to:
 
         ```bash
         http://<your-ec2-ip>/
@@ -450,21 +450,21 @@ sudo apt update
 
 4. Setup `.env` File
 
--   Create `.env` file:
+    - Create `.env` file:
 
-    ```bash
-    sudo nano .env
-    ```
+        ```bash
+        sudo nano .env
+        ```
 
--   Paste it all your backend environment variables
+    - Paste it all your backend environment variables
 
-    ```bash
-    # Example environment variables
-    PORT=7777
-    MONGO_DB=mongodb+srv://username:password@cluster.mongodb.net/dbname
-    ```
+        ```bash
+        # Example environment variables
+        PORT=7777
+        MONGO_DB=mongodb+srv://username:password@cluster.mongodb.net/dbname
+        ```
 
-    > Save and Exit
+        > Save and Exit
 
 5. Start the backend server with PM2
 
