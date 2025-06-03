@@ -156,11 +156,11 @@ _A step-by-step guide to deploying a MERN (MongoDB, Express.js, React, Node.js) 
     git clone https://github.com/your-username/backend-repo.git
     ```
 
-#### 4. 📂 Verify Cloned Repo
+3. Verify Cloned Repo
 
-```bash
-ls
-```
+    ```bash
+    ls
+    ```
 
 ---
 
